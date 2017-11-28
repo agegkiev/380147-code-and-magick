@@ -18,7 +18,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   for (var i = currentIndex + 1; i < times.length; i++) {
     if (maximum < times[i]) {
-      maximum = (Math.round(times[i] * 10) / 10);
+      maximum = times[i].toFixed(0);
     }
   }
 
@@ -48,6 +48,6 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillStyle = getColor();
     ctx.fillRect(baseX + (jump + histogramWidth) * j, baseY, histogramWidth, -(times[j] * step));
     ctx.fillText(names[j], baseX + (jump + histogramWidth) * j, baseY + lineHeight);
-    ctx.fillText((Math.round(times[j] * 10) / 10), baseX + (jump + histogramWidth) * j, baseY - (times[j] * step) - lineHeight);
+    ctx.fillText(times[j].toFixed(0), baseX + (jump + histogramWidth) * j, baseY - (times[j] * step) - lineHeight);
   }
 };
