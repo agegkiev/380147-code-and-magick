@@ -13,12 +13,10 @@ window.renderStatistics = function (ctx, names, times) {
 
   var currentIndex = 0;
   var max = times[currentIndex];
-  var maxIndex = -1;
 
   for (var i = currentIndex + 1; i < times.length; i++) {
     if (max < times[i]) {
       max = (Math.round(times[i] * 10) / 10);
-      maxIndex = i;
     }
   }
 
@@ -28,14 +26,26 @@ window.renderStatistics = function (ctx, names, times) {
   var histogramWidth = 40;
   var jump = 50;
   var baseY = 240;
-  var baseX = 120;
+  var baseX = 140;
   var lineHeight = 15;
-
-  for (var i = 0; i < times.length; i++){
-    ctx.fillRect(baseX, baseY, histogramWidth, -(times[i] * step));
-//    ctx.fillText(names[i], baseX += 90 * i + histogramWidth, baseY + lineHeight + jump * i);
+  var anyColor;
+  var getColor = function () {
+    if (names[i] === 'Вы') {
+      return myColor;
+    }
+    return anyColor;
   }
 
-console.log(names)
+  function getRandomInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
+  for (var i = 0; i < times.length; i++) {
+    getRandomInRange(0.5, 1);
+    anyColor = 'rgba(0, 0, 255, ' + getRandomInRange(0.1, 1) + ')';
+    ctx.fillStyle = getColor();
+    ctx.fillRect(baseX + (jump + histogramWidth) * i, baseY, histogramWidth, -(times[i] * step));
+    ctx.fillText(names[i], baseX + (jump + histogramWidth) * i, baseY + lineHeight);
+    ctx.fillText((Math.round(times[i] * 10) / 10), baseX + (jump + histogramWidth) * i, baseY -(times[i] * step) - lineHeight );
+  }
 }
