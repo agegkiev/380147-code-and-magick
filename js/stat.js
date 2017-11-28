@@ -30,7 +30,7 @@ window.renderStatistics = function (ctx, names, times) {
   var lineHeight = 15;
   var anyColor;
   var getColor = function () {
-    if (names[i] === 'Вы') {
+    if (names[j] === 'Вы') {
       return myColor;
     }
     return anyColor;
